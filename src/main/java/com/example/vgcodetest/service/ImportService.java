@@ -6,7 +6,7 @@ import com.example.vgcodetest.model.IngestionHistory;
 import com.example.vgcodetest.repository.GameSalesRepository;
 import com.example.vgcodetest.repository.IngestionHistoryRepository;
 import com.opencsv.bean.CsvToBeanBuilder;
-import jakarta.transaction.Transactional;
+import jakarta.validation.ConstraintViolationException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -26,7 +26,6 @@ public class ImportService {
   @Autowired
   IngestionHistoryRepository ingestionHistoryRepository;
 
-  @Transactional
   public Map<String, Object> importCsv(MultipartFile file) {
     Map<String, Object> summary = new HashMap<>();
     IngestionHistory ih = null;
@@ -59,14 +58,19 @@ public class ImportService {
       ingestionHistoryRepository.save(ih);
       summary.put("status", ih.getStatus());
 
-    } catch (Exception e) {
+    } catch (RuntimeException | IOException e) {
       // update the status
       ih.setStatus("failed");
       ingestionHistoryRepository.save(ih);
 
       summary.put("status", ih.getStatus());
+      if (e instanceof ConstraintViolationException) {
+        throw new RuntimeException(e);
+      }
+
       throw new InvalidCSVFileException();
     }
+
     return summary;
   }
 
