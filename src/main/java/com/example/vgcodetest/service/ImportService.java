@@ -1,5 +1,6 @@
 package com.example.vgcodetest.service;
 
+import com.example.vgcodetest.exception.InvalidCSVFileException;
 import com.example.vgcodetest.model.GameSales;
 import com.example.vgcodetest.model.IngestionHistory;
 import com.example.vgcodetest.repository.GameSalesRepository;
@@ -58,13 +59,13 @@ public class ImportService {
       ingestionHistoryRepository.save(ih);
       summary.put("status", ih.getStatus());
 
-    } catch (IOException e) {
+    } catch (Exception e) {
       // update the status
       ih.setStatus("failed");
       ingestionHistoryRepository.save(ih);
 
       summary.put("status", ih.getStatus());
-      throw new RuntimeException(e);
+      throw new InvalidCSVFileException();
     }
     return summary;
   }
