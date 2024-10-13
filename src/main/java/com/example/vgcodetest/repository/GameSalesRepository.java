@@ -11,5 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface GameSalesRepository extends JpaRepository<GameSales, Long> {
 
   Page<GameSales> findByDateOfSaleBetween(Pageable pageable, Timestamp start, Timestamp end);
+  Page<GameSales> findBySalePriceLessThan(Pageable pageable, Double lesser);
+  Page<GameSales> findBySalePriceGreaterThan(Pageable pageable, Double greater);
 
 }

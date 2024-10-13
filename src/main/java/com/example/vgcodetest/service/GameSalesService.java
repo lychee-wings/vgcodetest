@@ -59,8 +59,13 @@ public class GameSalesService {
     }
   }
 
-  public Page<GameSales> getGameSalesBySalePrice(int page, Double greater, Double lesser) {
-
-    return null;
+  public Page<GameSales> getGameSalesBySalePriceLessThan(int page, Double lesser) {
+    Pageable pageable = PageRequest.of(page, PAGE_SIZE);
+    return gameSalesRepository.findBySalePriceLessThan(pageable, lesser);
   }
+  public Page<GameSales> getGameSalesBySalePriceGreaterThan(int page, Double greater) {
+    Pageable pageable = PageRequest.of(page, PAGE_SIZE);
+    return gameSalesRepository.findBySalePriceGreaterThan(pageable, greater);
+  }
+
 }

@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
@@ -64,7 +65,122 @@ class GameSalesControllerTest {
         new TypeReference<List<GameSales>>() {
         });
 
+    // Take 1 sample in the init script for validation.
     MatcherAssert.assertThat(out, Matchers.hasItems(gameSales));
 
+    // To check the page size is 100
+    MatcherAssert.assertThat(response.get("size").intValue(), Matchers.equalTo(100));
+  }
+
+  @Test
+  void getGameSalesByPeriod() throws Exception {
+    MvcResult mvcResult = client.perform(get("/game-sales/dateOfSale")
+        .param("from", "2024-04-01")
+        .param("to", "2024-04-02")
+    ).andExpect(status().isOk()).andReturn();
+
+    // Map the response to JsonNode for the ease of getting the content(s).
+    JsonNode response = mapper.readTree(mvcResult.getResponse().getContentAsString());
+
+    // parsing to get the content for page.
+    List<GameSales> out = mapper.treeToValue(response.get("content"),
+        new TypeReference<List<GameSales>>() {
+        });
+
+    // Check has 1 element match
+    MatcherAssert.assertThat(out, Matchers.contains(gameSales));
+    MatcherAssert.assertThat(response.get("totalElements").intValue(), Matchers.equalTo(1));
+  }
+
+  @Test
+  void getGameSalesByPeriodNotFound() throws Exception {
+    MvcResult mvcResult = client.perform(get("/game-sales/dateOfSale")
+        .param("from", "2024-05-01")
+        .param("to", "2024-05-02")
+    ).andExpect(status().isOk()).andReturn();
+
+    // Map the response to JsonNode for the ease of getting the content(s).
+    JsonNode response = mapper.readTree(mvcResult.getResponse().getContentAsString());
+
+    // parsing to get the content for page.
+    List<GameSales> out = mapper.treeToValue(response.get("content"),
+        new TypeReference<List<GameSales>>() {
+        });
+
+    // Check has zero element match.
+    MatcherAssert.assertThat(out, Matchers.hasSize(0));
+    MatcherAssert.assertThat(response.get("totalElements").intValue(), Matchers.equalTo(0));
+  }
+
+  @Test
+  void getGameSalesByPeriodInvalidDateFormat() throws Exception {
+    MvcResult mvcResult = client.perform(get("/game-sales/dateOfSale")
+        .param("from", "2024-05-010")
+        .param("to", "2024-05-02")
+    ).andExpect(status().isBadRequest()).andReturn();
+
+    // Map the response to JsonNode for the ease of getting the content(s).
+    Map<String, Object> out = mapper.readValue(mvcResult.getResponse().getContentAsString(),
+        new TypeReference<Map<String, Object>>() {
+        });
+
+    // Check the response body fields.
+    MatcherAssert.assertThat(out.get("statusCode"), Matchers.equalTo(400));
+    MatcherAssert.assertThat(out.get("reason"), Matchers.equalTo("Invalid Date Format. Please use yyyy-MM-dd!"));
+  }
+
+  @Test
+  void getGameSalesByPeriodFromBiggerThanTo() throws Exception {
+    MvcResult mvcResult = client.perform(get("/game-sales/dateOfSale")
+        .param("from", "2024-05-01")
+        .param("to", "2023-04-02")
+    ).andExpect(status().isBadRequest()).andReturn();
+
+    // Map the response to JsonNode for the ease of getting the content(s).
+    Map<String, Object> out = mapper.readValue(mvcResult.getResponse().getContentAsString(),
+        new TypeReference<Map<String, Object>>() {
+        });
+
+    // Check the response body fields.
+    MatcherAssert.assertThat(out.get("statusCode"), Matchers.equalTo(400));
+    MatcherAssert.assertThat(out.get("reason"), Matchers.equalTo("Time period [from] MUST before [to]"));
+  }
+
+  @Test
+  void findGameSalesBySalePriceLessThan() throws Exception {
+    MvcResult mvcResult = client.perform(get("/game-sales/salePrice")
+        .param("lt", "70.0")
+    ).andExpect(status().isOk()).andReturn();
+
+    // Map the response to JsonNode for the ease of getting the content(s).
+    JsonNode response = mapper.readTree(mvcResult.getResponse().getContentAsString());
+
+    // parsing to get the content for page.
+    List<GameSales> out = mapper.treeToValue(response.get("content"),
+        new TypeReference<List<GameSales>>() {
+        });
+
+    // Check has 1 element match
+    MatcherAssert.assertThat(out, Matchers.contains(gameSales));
+    MatcherAssert.assertThat(response.get("totalElements").intValue(), Matchers.equalTo(1));
+  }
+
+  @Test
+  void findGameSalesBySalePriceGreaterThan() throws Exception {
+    MvcResult mvcResult = client.perform(get("/game-sales/salePrice")
+        .param("gt", "50.0")
+    ).andExpect(status().isOk()).andReturn();
+
+    // Map the response to JsonNode for the ease of getting the content(s).
+    JsonNode response = mapper.readTree(mvcResult.getResponse().getContentAsString());
+
+    // parsing to get the content for page.
+    List<GameSales> out = mapper.treeToValue(response.get("content"),
+        new TypeReference<List<GameSales>>() {
+        });
+
+    // Check has 2 elements match
+    MatcherAssert.assertThat(out, Matchers.hasItems(gameSales));
+    MatcherAssert.assertThat(response.get("totalElements").intValue(), Matchers.equalTo(2));
   }
 }
