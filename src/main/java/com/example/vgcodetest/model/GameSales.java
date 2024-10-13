@@ -9,18 +9,22 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 import java.sql.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
+@Table(name = "game_sales")
 public class GameSales {
 
   @Id
@@ -29,29 +33,29 @@ public class GameSales {
   @CsvBindByName(column = "id")
   private Long id;
 
-  @Min(1)
-  @Max(100)
+  @Min(value = 1, message = "game_no has exceeded limit!")
+  @Max(value = 100, message = "game_no has exceeded limit!")
   @Column(name = "game_no")
   @CsvBindByName(column = "game_no")
   private Integer gameNo;
 
-  @Size(max = 20)
+  @Size(max = 20, message = "game_name has exceeded limit!")
   @Column(name = "game_name")
   @CsvBindByName(column = "game_name")
   private String gameName;
 
-  @Size(max = 5)
+  @Size(max = 5, message = "game_code has exceeded limit!")
   @Column(name = "game_code")
   @CsvBindByName(column = "game_code")
   private String gameCode;
 
-  @Min(1)
-  @Max(2)
-  @Column()
+  @Min(value = 1, message = "unknown type!")
+  @Max(value = 2,  message = "unknown type!")
+  @Column(name = "game_type")
   @CsvBindByName()
   private Integer type;
 
-  @Max(100)
+  @Max(value = 100, message = "cost_price exceeded limit!")
   @Column(name = "cost_price")
   @CsvBindByName(column = "cost_price")
   private Double costPrice;

@@ -1,0 +1,21 @@
+spring:
+## database connection
+  datasource:
+    platform: postgres
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+
+  jpa:
+    show-sql: true
+    defer-datasource-initialization: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      jdbc:
+        batch_size: 500
+  sql:
+    init:
+      platform: postgres
+      mode: never

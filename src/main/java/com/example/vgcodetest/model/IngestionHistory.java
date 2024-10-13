@@ -19,5 +19,6 @@ public class IngestionHistory {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  private String source;
+  private String fileName;
+  private String status;
 }

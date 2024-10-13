@@ -1,29 +1,5 @@
 spring:
   application:
     name: vgcodetest
-
-## database connection
-  datasource:
-    platform: postgres
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: ${DB_USERNAME:postgres}
-    password: ${DB_PASSWORD:postgres}
-
-  jpa:
-    show-sql: true
-#    defer-datasource-initialization: true
-    hibernate:
-      ddl-auto: none
-    properties:
-      jdbc:
-        batch_size: 500
-  sql:
-    init:
-      platform: postgres
-#      mode: always
-
-#
-#  h2:
-#    console:
-#      enabled: true
+  profiles:
+    active: dev
