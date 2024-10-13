@@ -23,8 +23,6 @@ public class GameSalesService {
 
   static final int PAGE_SIZE = 100;
 
-//  private DateTimeFormatter format = DateTimeFormatter.ofPattern();
-
   public List<GameSales> getGameSales() {
 
     return gameSalesRepository.findAll();
