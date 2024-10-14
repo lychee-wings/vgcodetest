@@ -1,0 +1,101 @@
+game_no,game_name,game_code,type,cost_price,tax,sale_price
+1,Kingdom Wars,pc,1,0.0,0.09,0.0
+2,ONRAID,pc,1,9.17,0.09,9.99
+3,Mysterious Space,pc,2,9.17,0.09,10.0
+4,Gemini Wars,pc,2,13.75,0.09,14.99
+5,Actua Golf 3,pc,2,4.58,0.09,4.99
+6,Path of Exile,pc,1,0.0,0.09,0.0
+7,Insecters War,pc,2,0.0,0.09,0.0
+8,Scary Girl,pc,2,6.41,0.09,6.99
+9,Rally Copters,pc,2,6.41,0.09,6.99
+10,NBA 2K17,pc,2,55.04,0.09,59.99
+11,Crea,pc,2,13.75,0.09,14.99
+12,Hauntsters,pc,2,4.58,0.09,4.99
+13,Sky Rogue,pc,2,9.17,0.09,9.99
+14,MapleStory,pc,1,0.0,0.09,0.0
+15,Below Kryll,pc,2,4.58,0.09,4.99
+16,Alganon,pc,1,0.0,0.09,0.0
+17,Jamestown,pc,2,9.17,0.09,9.99
+18,Positron,pc,2,0.0,0.09,0.0
+19,ManaCollect,pc,2,2.56,0.09,2.79
+20,WolfQuest,pc,2,9.17,0.09,9.99
+21,Lost Planet(r) 2,pc,2,18.34,0.09,19.99
+22,Bombernauts,pc,2,9.17,0.09,9.99
+23,AoF Chess Club 2.0,pc,2,9.17,0.09,9.99
+24,Total War: WARHAMMER,pc,2,55.04,0.09,59.99
+25,Lost Castle,pc,2,9.17,0.09,9.99
+26,Altitude,pc,2,0.0,0.09,0.0
+27,Oh No! Bugs!,pc,2,4.58,0.09,4.99
+28,Pixel Cup Soccer 17,pc,2,9.17,0.09,9.99
+29,Chaser,pc,2,4.58,0.09,4.99
+30,Rivals of Aether,pc,2,13.75,0.09,14.99
+31,Jet Racing Extreme,pc,2,3.66,0.09,3.99
+32,Impire,pc,2,18.34,0.09,19.99
+33,Galaxy Admirals,pc,2,1.83,0.09,1.99
+34,Dark Eden,pc,1,0.0,0.09,0.0
+35,Tricky Towers,pc,2,13.75,0.09,14.99
+36,Arma 2,pc,2,11.92,0.09,12.99
+37,Blockships,pc,2,6.41,0.09,6.99
+38,Butsbal,pc,2,2.74,0.09,2.99
+39,Ms. Splosion Man,pc,2,9.17,0.09,9.99
+40,CATS!,pc,2,9.17,0.09,9.99
+41,Random Access Murder,pc,2,2.74,0.09,2.99
+42,DiRT Rally,pc,2,55.04,0.09,59.99
+43,SinaRun,pc,2,2.74,0.09,2.99
+44,T-Kara Puzzles,pc,2,2.74,0.09,2.99
+45,BattleSpace,pc,1,0.0,0.09,0.0
+46,Chicken Invaders 2,pc,2,3.66,0.09,3.99
+47,Sphere Complex,pc,2,9.17,0.09,9.99
+48,The Isle,pc,2,18.34,0.09,19.99
+49,Blind Blades,pc,2,4.58,0.09,4.99
+50,BRINK,pc,2,7.33,0.09,7.99
+51,Tank Brawl,pc,2,3.66,0.09,3.99
+52,IL-2 Sturmovik: 1946,pc,2,9.17,0.09,9.99
+53,Hunger Dungeon,pc,2,0.0,0.09,0.0
+54,A Fistful of Gun,pc,2,11.92,0.09,12.99
+55,Fighties,pc,2,4.58,0.09,4.99
+56,RIP - Trilogy(tm),pc,2,4.58,0.09,4.99
+57,ORION,pc,2,0.91,0.09,0.99
+58,Capsized,pc,2,9.17,0.09,9.99
+59,The Settlers Online,pc,2,0.0,0.09,0.0
+60,Crusader Kings II,pc,2,9.17,0.09,9.99
+61,Tennis Elbow 2013,pc,2,22.93,0.09,24.99
+62,FLASHOUT 2,pc,2,4.58,0.09,4.99
+63,Broforce,pc,2,6.87,0.09,7.49
+64,SUPERFIGHT,pc,2,9.17,0.09,9.99
+65,Rock of Ages,pc,2,9.17,0.09,9.99
+66,Take On Mars,pc,2,20.17,0.09,21.99
+67,Lost Saga NA,pc,2,0.0,0.09,0.0
+68,Dragomon Hunter,pc,1,0.0,0.09,0.0
+69,Shiftlings,pc,2,6.87,0.09,7.49
+70,Tatsu,pc,2,9.17,0.09,9.99
+71,Crate Punks,pc,2,0.91,0.09,0.99
+72,Knights of Honor,pc,2,9.17,0.09,9.99
+73,Transformice,pc,1,0.0,0.09,0.0
+74,DeathCrank,pc,2,0.0,0.09,0.0
+75,Brief Karate Foolish,pc,2,0.0,0.09,0.0
+76,LILT,pc,2,4.58,0.09,4.99
+77,Iron Storm,pc,2,2.74,0.09,2.99
+78,Dungeons 2,pc,2,27.51,0.09,29.99
+79,Starion Tactics,pc,2,9.17,0.09,9.99
+80,Project CARS,pc,2,27.51,0.09,29.99
+81,Tempest,pc,2,13.75,0.09,14.99
+82,Etherium,pc,2,18.34,0.09,19.99
+83,Arena Wars 2,pc,2,3.66,0.09,3.99
+84,Demons with Shotguns,pc,2,9.17,0.09,9.99
+85,Cubemen,pc,2,3.66,0.09,3.99
+86,Ziro,pc,2,4.58,0.09,4.99
+87,Cowbots and Aliens,pc,2,0.0,0.09,0.0
+88,Gumboy Tournament,pc,2,2.74,0.09,2.99
+89,InfinitasDM,pc,2,9.17,0.09,9.99
+90,Bowl VR,pc,2,6.41,0.09,6.99
+91,Porcunipine,pc,2,9.17,0.09,9.99
+92,Soccer Rage,pc,2,9.17,0.09,9.99
+93,Streets of Fury EX,pc,2,9.17,0.09,9.99
+94,RoBoRumble,pc,2,5.5,0.09,5.99
+95,iFactor,pc,2,0.0,0.09,0.0
+96,Brawlhalla,pc,2,0.0,0.09,0.0
+97,Dofus,pc,1,0.0,0.09,0.0
+98,Tales of Zestiria,pc,2,45.86,0.09,49.99
+99,Elven Assassin,pc,2,5.13,0.09,5.59
+100,Hive Jump,pc,2,18.34,0.09,19.99
