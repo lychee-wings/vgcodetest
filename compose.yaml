@@ -1,9 +1,3 @@
-#services:
-#  web:
-#    build: .
-#    ports:
-#      - "8080:8080"
-
 services:
   app:
     image: 'vgcodetest-app:latest'
@@ -17,7 +11,7 @@ services:
     environment:
       - 'DB_URL=jdbc:postgresql://host.docker.internal:5432/postgres'
       - 'DB_USERNAME=postgres'
-      - 'DB_PASSWORD=postgres'
+      - 'DB_PASSWORD=password'
 
   db_postgres:
     image: 'postgres:15.2'
@@ -25,6 +19,6 @@ services:
     environment:
       - 'POSTGRES_USER=postgres'
       - 'POSTGRES_DB=postgres'
-      - 'POSTGRES_PASSWORD=postgres'
+      - 'POSTGRES_PASSWORD=password'
     volumes:
       - ./src/main/resources/schema-postgres.sql:/docker-entrypoint-initdb.d/schema-postgres.sql
