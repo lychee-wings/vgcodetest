@@ -34,14 +34,6 @@ class ImportControllerTest {
   private ResourceLoader resourceLoader;
   private final ObjectMapper mapper = new ObjectMapper();
 
-  @BeforeEach
-  void setUp() {
-  }
-
-  @AfterEach
-  void tearDown() {
-  }
-
   @Test
   void importCsv() throws Exception {
     File file = resourceLoader.getResource("classpath:gameTitlesOneK.csv").getFile();

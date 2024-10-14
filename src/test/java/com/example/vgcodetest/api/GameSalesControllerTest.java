@@ -13,8 +13,6 @@ import java.util.List;
 import java.util.Map;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -31,22 +29,18 @@ class GameSalesControllerTest {
 
   @Autowired
   private MockMvc client;
-
-  private GameSales gameSales;
-
   private ObjectMapper mapper = new ObjectMapper();
 
-  @BeforeEach
-  void setUp() {
+  private GameSales gs1 = new GameSales(10001L, 90, "Assassin's Creed III", "PS3", 2, 59.0, 0.09,
+      64.31,
+      Timestamp.valueOf("2024-04-01 10:00:00"),
+      IngestionHistory.builder().id(1L).fileName("unitTest").status("success").build());
 
-    gameSales = new GameSales(10001L, 90, "Assassin's Creed III", "PS3", 2, 59.0, 0.09, 64.31,
-        Timestamp.valueOf("2024-04-01 10:00:00"),
-        IngestionHistory.builder().id(1L).fileName("unitTest").status("success").build());
-  }
+  private GameSales gs2 = new GameSales(10002L, 80, "Fallout 4", "PS4", 2, 70.0, 0.09,
+      76.3,
+      Timestamp.valueOf("2024-04-02 11:00:00"),
+      IngestionHistory.builder().id(1L).fileName("unitTest").status("success").build());
 
-  @AfterEach
-  void tearDown() {
-  }
 
   /**
    * Positive test case that only check the sending of the api with status OK.
@@ -66,7 +60,7 @@ class GameSalesControllerTest {
         });
 
     // Take 1 sample in the init script for validation.
-    MatcherAssert.assertThat(out, Matchers.hasItems(gameSales));
+    MatcherAssert.assertThat(out, Matchers.containsInAnyOrder(gs1, gs2));
 
     // To check the page size is 100
     MatcherAssert.assertThat(response.get("size").intValue(), Matchers.equalTo(100));
@@ -88,7 +82,7 @@ class GameSalesControllerTest {
         });
 
     // Check has 1 element match
-    MatcherAssert.assertThat(out, Matchers.contains(gameSales));
+    MatcherAssert.assertThat(out, Matchers.contains(gs1));
     MatcherAssert.assertThat(response.get("totalElements").intValue(), Matchers.equalTo(1));
   }
 
@@ -126,7 +120,8 @@ class GameSalesControllerTest {
 
     // Check the response body fields.
     MatcherAssert.assertThat(out.get("statusCode"), Matchers.equalTo(400));
-    MatcherAssert.assertThat(out.get("reason"), Matchers.equalTo("Invalid Date Format. Please use yyyy-MM-dd!"));
+    MatcherAssert.assertThat(out.get("reason"),
+        Matchers.equalTo("Invalid Date Format. Please use yyyy-MM-dd!"));
   }
 
   @Test
@@ -143,7 +138,8 @@ class GameSalesControllerTest {
 
     // Check the response body fields.
     MatcherAssert.assertThat(out.get("statusCode"), Matchers.equalTo(400));
-    MatcherAssert.assertThat(out.get("reason"), Matchers.equalTo("Time period [from] MUST before [to]"));
+    MatcherAssert.assertThat(out.get("reason"),
+        Matchers.equalTo("Time period [from] MUST before [to]"));
   }
 
   @Test
@@ -161,7 +157,7 @@ class GameSalesControllerTest {
         });
 
     // Check has 1 element match
-    MatcherAssert.assertThat(out, Matchers.contains(gameSales));
+    MatcherAssert.assertThat(out, Matchers.contains(gs1));
     MatcherAssert.assertThat(response.get("totalElements").intValue(), Matchers.equalTo(1));
   }
 
@@ -180,7 +176,7 @@ class GameSalesControllerTest {
         });
 
     // Check has 2 elements match
-    MatcherAssert.assertThat(out, Matchers.hasItems(gameSales));
+    MatcherAssert.assertThat(out, Matchers.containsInAnyOrder(gs1, gs2));
     MatcherAssert.assertThat(response.get("totalElements").intValue(), Matchers.equalTo(2));
   }
 }

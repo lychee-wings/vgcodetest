@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class TotalSalesService {
 
+  public static final String TOTAL_NUMBER_OF_GAMES_SOLD = "totalNumberOfGamesSold";
+  public static final String TOTAL_SALES = "totalSales";
   @Autowired
   private GameSalesRepository gameSalesRepository;
 
@@ -32,9 +34,9 @@ public class TotalSalesService {
       }
 
       // Total number of games sold = COUNT(*) between from <==> to
-      Integer count = gameSalesRepository.queryGameCountBetween(tsStart, tsEnd);
+      int count = gameSalesRepository.queryGameCountBetween(tsStart, tsEnd);
 
-      return Map.of("totalNumberOfGamesSold", count);
+      return Map.of(TOTAL_NUMBER_OF_GAMES_SOLD, count);
 
     } catch (DateTimeParseException e) {
       throw new InvalidDateFormatException();
@@ -57,7 +59,11 @@ public class TotalSalesService {
       // Total number of games sold = SUM(sale_price) between from <==> to
       Double sales = gameSalesRepository.queryGameSalesBetween(tsStart, tsEnd);
 
-      return Map.of("totalSales", Double.valueOf(new DecimalFormat("0.00").format(sales)));
+      if (sales == null) {
+        sales = 0.0;
+      }
+
+      return Map.of(TOTAL_SALES, Double.valueOf(new DecimalFormat("0.00").format(sales)));
 
     } catch (DateTimeParseException e) {
       throw new InvalidDateFormatException();
@@ -81,7 +87,11 @@ public class TotalSalesService {
       // Total number of games sold = SUM(sale_price) between from <==> to
       Double sales = gameSalesRepository.queryGameNoAndGameSalesBetween(gameNo, tsStart, tsEnd);
 
-      return Map.of("totalSales", Double.valueOf(new DecimalFormat("0.00").format(sales)));
+      if (sales == null) {
+        sales = 0.0;
+      }
+
+      return Map.of(TOTAL_SALES, Double.valueOf(new DecimalFormat("0.00").format(sales)));
 
     } catch (DateTimeParseException e) {
       throw new InvalidDateFormatException();
