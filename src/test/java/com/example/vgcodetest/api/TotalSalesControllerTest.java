@@ -11,6 +11,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.Map;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -18,17 +19,23 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.env.Environment;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 @SpringBootTest
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
+@Sql({"/schema-H2.sql", "/data-H2.sql"})
 class TotalSalesControllerTest {
 
   @Autowired
   private MockMvc client;
+
+  @Autowired
+  private Environment environment;
 
   private ObjectMapper mapper = new ObjectMapper();
 
@@ -44,6 +51,9 @@ class TotalSalesControllerTest {
 
   @Test
   void findGameCountByPeriod() throws Exception {
+
+    System.out.println("QR Debug: " + Arrays.toString(environment.getActiveProfiles()));
+
     MvcResult mvcResult = client.perform(get("/games-sold/dateOfSale")
         .param("from", "2024-04-01")
         .param("to", "2024-04-02")
@@ -59,6 +69,8 @@ class TotalSalesControllerTest {
 
   @Test
   void findTotalSalesByPeriod() throws Exception {
+    System.out.println("QR Debug: " + Arrays.toString(environment.getActiveProfiles()));
+
     MvcResult mvcResult = client.perform(get("/total-sales/dateOfSale")
         .param("from", "2024-04-01")
         .param("to", "2024-04-03")
@@ -73,7 +85,7 @@ class TotalSalesControllerTest {
   }
 
   @Test
-  void findTotalSalesByIvalidPeriod() throws Exception {
+  void findTotalSalesByInvalidPeriod() throws Exception {
     MvcResult mvcResult = client.perform(get("/total-sales/dateOfSale")
         .param("from", "2024-04-01")
         .param("to", "2023-04-03")
