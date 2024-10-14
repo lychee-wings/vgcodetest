@@ -26,3 +26,5 @@ services:
       - 'POSTGRES_USER=postgres'
       - 'POSTGRES_DB=postgres'
       - 'POSTGRES_PASSWORD=postgres'
+    volumes:
+      - ./src/main/resources/schema-postgres.sql:/docker-entrypoint-initdb.d/schema-postgres.sql

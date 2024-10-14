@@ -34,8 +34,8 @@ CREATE OR REPLACE FUNCTION metadataUpdate() RETURNS trigger AS '
     END;
 ' LANGUAGE plpgsql;
 
-CREATE or REPLACE TRIGGER metadataUpdate BEFORE INSERT OR UPDATE ON game_sales
-    FOR EACH ROW EXECUTE FUNCTION metadataUpdate();
+CREATE TRIGGER metadataUpdate BEFORE INSERT OR UPDATE ON game_sales
+    FOR EACH ROW EXECUTE PROCEDURE metadataUpdate();
 
 -- This is for logging purpose.
 DROP TABLE IF EXISTS ingestion_history;

@@ -23,7 +23,7 @@ CREATE TABLE game_sales (
 	CONSTRAINT game_sales_type_check CHECK (((game_type <= 2) AND (game_type >= 1)))
 );
 
---CREATE OR REPLACE FUNCTION metadataUpdate() RETURNS trigger AS '
+--CREATE FUNCTION metadataUpdate() RETURNS trigger AS '
 --    BEGIN
 --        IF NEW.created IS NULL THEN
 --          NEW.created := CURRENT_TIMESTAMP;
@@ -33,9 +33,9 @@ CREATE TABLE game_sales (
 --        RETURN NEW;
 --    END;
 --' LANGUAGE plpgsql;
-
---CREATE or REPLACE TRIGGER metadataUpdate BEFORE INSERT OR UPDATE ON game_sales
---    FOR EACH ROW EXECUTE FUNCTION metadataUpdate();
+--
+--CREATE TRIGGER metadataUpdate BEFORE INSERT OR UPDATE ON game_sales
+--    FOR EACH ROW EXECUTE PROCEDURE metadataUpdate();
 
 -- This is for logging purpose.
 DROP TABLE IF EXISTS ingestion_history;
