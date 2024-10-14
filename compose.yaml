@@ -1,24 +1,24 @@
 services:
   app:
-    image: 'vgcodetest-app:latest'
+    image: vgcodetest-app:latest
     build:
         context: .
-    container_name: 'service-app'
+    container_name: service-app
     depends_on:
       - db_postgres
     ports:
-      - "8080:8080"
+      - 8080:8080
     environment:
-      - 'DB_URL=jdbc:postgresql://host.docker.internal:5432/postgres'
-      - 'DB_USERNAME=postgres'
-      - 'DB_PASSWORD=password'
+      DB_URL: jdbc:postgresql://db_postgres:5432/postgres
+      DB_USERNAME: postgres
+      DB_PASSWORD: password
 
   db_postgres:
-    image: 'postgres:15.2'
-    container_name: 'db-app'
+    image: postgres:15.2
+    container_name: db-app
     environment:
-      - 'POSTGRES_USER=postgres'
-      - 'POSTGRES_DB=postgres'
-      - 'POSTGRES_PASSWORD=password'
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: password
     volumes:
       - ./src/main/resources/schema-postgres.sql:/docker-entrypoint-initdb.d/schema-postgres.sql
