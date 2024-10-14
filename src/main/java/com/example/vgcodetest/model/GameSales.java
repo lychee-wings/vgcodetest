@@ -1,6 +1,7 @@
 package com.example.vgcodetest.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.opencsv.bean.CsvBindByName;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -71,9 +72,9 @@ public class GameSales {
   @CsvBindByName(column = "date_of_sale")
   private Timestamp dateOfSale;
 
-
   @OneToOne
   @JoinColumn(name = "ingestion_id")
+  @JsonIgnore
   private IngestionHistory ingestionHistory;
 
 }

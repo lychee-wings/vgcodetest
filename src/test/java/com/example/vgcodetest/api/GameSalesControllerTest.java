@@ -36,12 +36,12 @@ class GameSalesControllerTest {
   private GameSales gs1 = new GameSales(10001L, 90, "Assassin's Creed III", "PS3", 2, 59.0, 0.09,
       64.31,
       Timestamp.valueOf("2024-04-01 10:00:00"),
-      IngestionHistory.builder().id(1L).fileName("unitTest").status("success").build());
+      null);
 
   private GameSales gs2 = new GameSales(10002L, 80, "Fallout 4", "PS4", 2, 70.0, 0.09,
       76.3,
       Timestamp.valueOf("2024-04-02 11:00:00"),
-      IngestionHistory.builder().id(1L).fileName("unitTest").status("success").build());
+      null);
 
 
   /**
