@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/game-sales")
-@Log4j2
 public class GameSalesController {
 
   @Autowired

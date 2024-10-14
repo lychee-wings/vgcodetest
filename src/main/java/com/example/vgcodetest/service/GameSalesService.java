@@ -8,7 +8,6 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,11 +21,6 @@ public class GameSalesService {
   private GameSalesRepository gameSalesRepository;
 
   static final int PAGE_SIZE = 100;
-
-  public List<GameSales> getGameSales() {
-
-    return gameSalesRepository.findAll();
-  }
 
   public Page<GameSales> getGameSales(int page) {
     Pageable pageable = PageRequest.of(page, PAGE_SIZE);
@@ -63,6 +57,7 @@ public class GameSalesService {
     Pageable pageable = PageRequest.of(page, PAGE_SIZE);
     return gameSalesRepository.findBySalePriceLessThan(pageable, lesser);
   }
+
   public Page<GameSales> getGameSalesBySalePriceGreaterThan(int page, Double greater) {
     Pageable pageable = PageRequest.of(page, PAGE_SIZE);
     return gameSalesRepository.findBySalePriceGreaterThan(pageable, greater);

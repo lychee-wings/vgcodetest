@@ -14,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/import")
-@Log4j2
 public class ImportController {
 
   @Autowired
