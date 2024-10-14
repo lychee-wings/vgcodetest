@@ -19,12 +19,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@Entity
+@Entity(name = "game_sales")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-@Table(name = "game_sales")
 public class GameSales {
 
   @Id
